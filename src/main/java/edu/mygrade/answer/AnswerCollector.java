@@ -3,6 +3,7 @@ package edu.mygrade.answer;
 import java.util.ArrayList;
 import java.util.Iterator;
 import java.util.List;
+import java.util.Objects;
 import java.util.concurrent.atomic.AtomicInteger;
 
 
@@ -14,8 +15,12 @@ public class AnswerCollector implements Iterable<Answer> {
 
 	private final List<Answer> answers;
 
-	public AnswerCollector(int maxProblemCount) {
+	private AnswerCollector(int maxProblemCount) {
 		answers = new ArrayList<>(maxProblemCount);
+	}
+
+	public static AnswerCollector with(int maxProblemCount) {
+		return new AnswerCollector(maxProblemCount);
 	}
 
 	public void add(Answer answer) {
@@ -45,6 +50,11 @@ public class AnswerCollector implements Iterable<Answer> {
 		return incorrectCount;
 	}
 
+
+	@Override
+	public int hashCode() {
+		return Objects.hashCode(answers);
+	}
 
 	@Override
 	public boolean equals(Object obj) {

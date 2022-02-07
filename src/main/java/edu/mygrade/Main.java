@@ -1,6 +1,7 @@
 package edu.mygrade;
 
-import edu.mygrade.answer.Answer;
+import edu.mygrade.answer.AnswerFactory;
+import edu.mygrade.answer.NumberAnswer;
 import edu.mygrade.answer.AnswerCollector;
 import edu.mygrade.score.Score;
 import edu.mygrade.score.ScoreCollector;
@@ -18,22 +19,22 @@ public class Main {
 		int maxProblemCount = Integer.parseInt(br.readLine());
 
 		// 제출 정답
-		AnswerCollector inputAnswers = new AnswerCollector(maxProblemCount);
+		AnswerCollector inputAnswers = AnswerCollector.with(maxProblemCount);
 		{
 			StringTokenizer st = new StringTokenizer(br.readLine());
 			int index = maxProblemCount;
 			while (index-- > 0) {
-				inputAnswers.add(new Answer(Integer.parseInt(st.nextToken())));
+				inputAnswers.add(AnswerFactory.valueOf(Integer.parseInt(st.nextToken())));
 			}
 		}
 
 		// 답안지
-		AnswerCollector answers = new AnswerCollector(maxProblemCount);
+		AnswerCollector answers = AnswerCollector.with(maxProblemCount);
 		{
 			StringTokenizer st = new StringTokenizer(br.readLine());
 			int index = maxProblemCount;
 			while (index-- > 0) {
-				answers.add(new Answer(Integer.parseInt(st.nextToken())));
+				answers.add(AnswerFactory.valueOf(Integer.parseInt(st.nextToken())));
 			}
 		}
 
