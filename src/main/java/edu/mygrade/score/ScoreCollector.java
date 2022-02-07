@@ -10,7 +10,7 @@ import edu.mygrade.util.DecimalUtil;
 public class ScoreCollector {
 
 	// 총합
-	private final Score totalScore;
+	private Score totalScore;
 
 	// 문항별 점수
 	private Score amountScore;
@@ -18,7 +18,11 @@ public class ScoreCollector {
 	// 소수점 올림 자리
 	private final int DECIMAL_POINT = 1;
 
-	public ScoreCollector(Score totalScore) {
+	public static ScoreCollector with(Score totalScore) {
+		return new ScoreCollector(totalScore);
+	}
+
+	private ScoreCollector(Score totalScore) {
 		this.totalScore = totalScore;
 		this.amountScore = totalScore;
 	}
@@ -31,8 +35,9 @@ public class ScoreCollector {
 		return amountScore;
 	}
 
-	public void setMaxProblemCount(int maxProblemCount) {
-		this.amountScore = new Score(DecimalUtil.round(this.totalScore.getScore() / maxProblemCount, DECIMAL_POINT));
+	public ScoreCollector maxProblemCount(int maxProblemCount) {
+		this.amountScore = Score.valueOf(DecimalUtil.round(this.totalScore.getScore() / maxProblemCount, DECIMAL_POINT));
+		return this;
 	}
 
 }

@@ -39,9 +39,7 @@ public class Main {
 
 		// 총 점수
 		final double totalScore = 100;
-		ScoreCollector scoreCollector = new ScoreCollector(new Score(totalScore));
-
-		scoreCollector.setMaxProblemCount(maxProblemCount);
+		ScoreCollector scoreCollector = ScoreCollector.with(Score.valueOf(totalScore)).maxProblemCount(maxProblemCount);
 
 		int incorrectCount = inputAnswers.equalsAndGetIncorrectCount(answers);
 		double expectScore = totalScore - (scoreCollector.getAmountScore().getScore() * incorrectCount);

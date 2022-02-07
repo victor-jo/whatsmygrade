@@ -9,8 +9,12 @@ public class Score {
 
 	private final double score;
 
-	public Score(double score) {
+	private Score(double score) {
 		this.score = score;
+	}
+
+	public static Score valueOf(double score) {
+		return new Score(score);
 	}
 
 	public double getScore() {
